@@ -17,6 +17,12 @@ export class LoggingInterceptor implements NestInterceptor {
     const request = context.switchToHttp().getRequest<Request>();
     const response = context.switchToHttp().getResponse<Response>();
     const { method, url } = request;
+
+    // Skip logging for health check requests
+    if (url === "/health") {
+      return next.handle();
+    }
+
     const startTime = Date.now();
 
     return next.handle().pipe(

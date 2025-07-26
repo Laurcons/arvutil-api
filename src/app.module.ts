@@ -3,7 +3,7 @@ import { ConfigModule } from "@nestjs/config";
 import { MongooseModule } from "@nestjs/mongoose";
 import { ThrottlerModule } from "@nestjs/throttler";
 import { APP_GUARD } from "@nestjs/core";
-import { ThrottlerGuard } from "@nestjs/throttler";
+import { CustomThrottlerGuard } from "./common/guards/custom-throttler.guard";
 import { TrackingModule } from "./tracking/tracking.module";
 
 @Module({
@@ -14,10 +14,10 @@ import { TrackingModule } from "./tracking/tracking.module";
     }),
     MongooseModule.forRoot(process.env.MONGODB_URI),
     ThrottlerModule.forRoot([
-      {
-        ttl: 60000, // 1 minute
-        limit: 50, // 50 requests per minute
-      },
+      // {
+      //   ttl: 60000, // 1 minute
+      //   limit: 50, // 50 requests per minute
+      // },
       {
         ttl: 86400000, // 1 day
         limit: 1000, // 1000 requests per day
@@ -28,7 +28,7 @@ import { TrackingModule } from "./tracking/tracking.module";
   providers: [
     {
       provide: APP_GUARD,
-      useClass: ThrottlerGuard,
+      useClass: CustomThrottlerGuard,
     },
   ],
 })
