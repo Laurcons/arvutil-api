@@ -18,6 +18,10 @@ import { TrackingModule } from "./tracking/tracking.module";
         ttl: 60000, // 1 minute
         limit: 50, // 50 requests per minute
       },
+      {
+        ttl: 86400000, // 1 day
+        limit: 1000, // 1000 requests per day
+      },
     ]),
     TrackingModule,
   ],

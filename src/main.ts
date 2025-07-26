@@ -2,6 +2,7 @@ import { NestFactory } from "@nestjs/core";
 import { Logger, ValidationPipe } from "@nestjs/common";
 import { NestExpressApplication } from "@nestjs/platform-express";
 import { AppModule } from "./app.module";
+import { LoggingInterceptor } from "./common/interceptors/logging.interceptor";
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -30,6 +31,9 @@ async function bootstrap() {
       transform: true,
     })
   );
+
+  // Enable logging interceptor globally
+  app.useGlobalInterceptors(new LoggingInterceptor());
 
   const port = process.env.PORT || 3000;
   await app.listen(port);
