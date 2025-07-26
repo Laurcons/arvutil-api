@@ -1,0 +1,64 @@
+# NestJS Project Rules for ArvUtil API
+
+## Project Structure
+
+- Each REST entity in its own module under `src/`
+- Module structure: `controller/`, `dtos/`, `services/`, `models/`, `module-name.module.ts`
+- Always create complete folder structure for new modules
+
+## TypeScript & Code Style
+
+- Strict TypeScript typing with return types
+- Use `interface` over `type` for object shapes
+- PascalCase for classes/interfaces, camelCase for variables/methods, kebab-case for files/routes
+- 2 spaces indentation, semicolons, single quotes, trailing commas
+
+## Validation & Security
+
+- All DTOs use `class-validator` decorators
+- Always validate user inputs, never skip validation
+- Use environment variables for secrets, never commit sensitive data
+
+## Database (MongoDB/Mongoose)
+
+- Models must NOT extend `Document` type
+- Use `@Schema()` with timestamps, `@Prop()` for properties
+- Add indexes on schema object, not in `@Prop()` decorator
+- Export `[EntityName]Document` type and `[EntityName]Schema`
+
+## Controllers & Services
+
+- Use proper HTTP decorators with route paths
+- Return (modified/created) entity in controller methods
+- Use `@Injectable()`, constructor injection, async/await
+- Handle errors with NestJS exception filters
+
+## Configuration & Environment
+
+- Use `@nestjs/config` with default values
+- Use `.env` for local development, `.env.example` for docs
+- Validate required environment variables on startup
+
+## Import/Export & Naming
+
+- Relative imports within modules, absolute for shared utilities
+- Group imports: external libraries, then internal modules
+- File naming: `route-name.dto.ts`, `model-name.ts`, `name.service.ts`
+
+## API Design
+
+- RESTful conventions with proper HTTP methods
+- Consistent response formats and status codes
+- Use versioning when needed
+
+## Testing & Documentation
+
+- Do NOT perform any unit testing
+- Use JSDoc for complex functions, document API endpoints
+- Keep README.md updated with setup instructions
+
+## Git & Dependencies
+
+- Meaningful commit messages, conventional commits format
+- Never commit `.env` files, use feature branches
+- Keep dependencies updated, avoid unnecessary ones
