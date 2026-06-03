@@ -6,6 +6,7 @@ import { APP_GUARD } from "@nestjs/core";
 import { CustomThrottlerGuard } from "./common/guards/custom-throttler.guard";
 import { TrackingModule } from "./tracking/tracking.module";
 import { HealthModule } from "./health/health.module";
+import { UpdatesModule } from "./updates/updates.module";
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { HealthModule } from "./health/health.module";
     ]),
     TrackingModule,
     HealthModule,
+    UpdatesModule,
   ],
   providers: [
     {
